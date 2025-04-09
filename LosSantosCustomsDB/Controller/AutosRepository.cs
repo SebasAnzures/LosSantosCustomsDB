@@ -47,8 +47,73 @@ namespace LosSantosCustomsDB.Controller
             }
 
         }
-
-
+        public bool Insertar(Autos auto)
+        {
+            try
+            {
+                using (SqlConnection conn = conexion.GetConnection())
+                {
+                    string query = "Insertar";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@marca", auto.marca);
+                    cmd.Parameters.AddWithValue("@modelo", auto.modelo);
+                    cmd.Parameters.AddWithValue("@ano", auto.ano);
+                    cmd.Parameters.AddWithValue("@disponible", auto.disponible);
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar el auto: " + ex.Message);
+            }
+        }
+        public bool Actualizar(Autos auto)
+        {
+            try
+            {
+                using (SqlConnection conn = conexion.GetConnection())
+                {
+                    string query = "Actualizar";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idauto", auto.idauto);
+                    cmd.Parameters.AddWithValue("@marca", auto.marca);
+                    cmd.Parameters.AddWithValue("@modelo", auto.modelo);
+                    cmd.Parameters.AddWithValue("@ano", auto.ano);
+                    cmd.Parameters.AddWithValue("@disponible", auto.disponible);
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el auto: " + ex.Message);
+            }
+        }
+        public bool Eliminar(int idauto)
+        {
+            try
+            {
+                using (SqlConnection conn = conexion.GetConnection())
+                {
+                    string query = "Eliminar";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idauto", idauto);
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el auto: " + ex.Message);
+            }
+        }
     }
 
 }

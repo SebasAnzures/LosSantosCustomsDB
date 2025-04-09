@@ -16,7 +16,7 @@ namespace LosSantosCustomsDB.Model
             this.marca = marca;
             this.modelo = modelo;
             this.ano = ano;
-            this.disponible = disponible;
+            this.disponible = dispisponible;
         }
         public int idauto { get; set; }
         public string? marca { get; set; }
